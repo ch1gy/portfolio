@@ -233,6 +233,7 @@ const CSS = `
     .skills-headline { font-size: clamp(56px, 16vw, 80px); }
     .skill-bar-name { font-size: 16px; }
     .exploring-item { font-size: 18px; }
+    .ticker-inner { animation-duration: 10s; }
   }
 `;
 
