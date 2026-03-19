@@ -20,19 +20,27 @@ const DATA = {
       link: "https://github.com/ch1gy/Council",
       github: true,
     },
+    {
+      num: "003", title: "Satellite Council", year: "2026",
+      category: "Personal Project / Geospatial AI",
+      desc: "Multi-LLM earth observation tool. Fetches real Sentinel-2 satellite imagery from Microsoft Planetary Computer, computes NDVI vegetation indices, and passes data through a 4-model AI Council — a vision model describes the image, a classifier maps land cover, a synthesizer writes environmental reports, and an evaluator scores confidence. Includes time series change detection across up to 4 dates with pixel-level vegetation gain/loss maps and PDF export with embedded imagery and NDVI charts.",
+      tags: ["React", "Python", "Flask", "Sentinel-2", "NDVI", "Ollama", "Kimi K2", "Llama 4", "PDF Export", "Vercel", "Railway"],
+      link: "https://satellite-council.vercel.app/",
+    },
   ],
   skills: [
-    { name: "HTML / CSS",   level: 85 },
-    { name: "Python",       level: 80 },
-    { name: "JavaScript",   level: 75 },
-    { name: "Flask",        level: 75 },
-    { name: "React",        level: 75 },
-    { name: "C / C++",      level: 72 },
-    { name: "Git / GitHub", level: 72 },
-    { name: "SQL",          level: 70 },
-    { name: "AI / LLM APIs", level: 78 },
+    { name: "Python",                      level: 88 },
+    { name: "AI / LLM APIs",              level: 82 },
+    { name: "HTML / CSS",                 level: 85 },
+    { name: "Flask",                      level: 80 },
+    { name: "JavaScript",                 level: 75 },
+    { name: "React",                      level: 75 },
+    { name: "Sentinel-2 / Remote Sensing",level: 70 },
+    { name: "SQL",                        level: 70 },
+    { name: "Git / GitHub",               level: 72 },
+    { name: "C / C++",                    level: 72 },
   ],
-  exploring: ["CompTIA Security+", "Geospatial Analysis", "Game Dev (C++)", "LLM Pipeline Architecture"],
+  exploring: ["CompTIA Security+", "Remote Sensing & Environmental AI", "LLM Pipeline Architecture", "Game Dev (C++)"],
 };
 
 // ── FONTS & PAGE CSS (sections only — layout CSS lives in Layout.jsx) ─────────
@@ -271,7 +279,7 @@ function SkillBar({ name, level, delay }) {
 }
 
 function Ticker() {
-  const items = ["Web Developer", "CS50 Graduate", "Python", "Flask", "React", "AI & LLMs", "Geospatial", "Open to Work", "Nairobi, East Africa", "Building Things"];
+  const items = ["Software Engineer", "CS50 Graduate", "Python", "Flask", "React", "AI & LLMs", "Geospatial", "Open to Work", "Nairobi, East Africa", "Building Things"];
   const doubled = [...items, ...items];
   return (
     <div className="ticker">
@@ -294,7 +302,7 @@ export default function App() {
         {/* ── HERO ── */}
         <section className="hero" id="home">
           <div className="hero-issue">
-            <span className="hero-issue-text">Portfolio — Web & Software Developer — Nairobi, East Africa</span>
+            <span className="hero-issue-text">Portfolio — Software Engineer — Nairobi, East Africa</span>
             <span className="hero-issue-num">VOL. 69</span>
           </div>
           <div className="hero-body">
@@ -305,7 +313,7 @@ export default function App() {
             </div>
             <div className="hero-right">
               <p className="hero-tagline">
-                CS50 graduate. I build <em>clean software</em> that works — from production AI tools to satellite earth observation systems.
+                I build tools that work — from <em>client sites</em> to AI-powered satellite analysis systems.
               </p>
               <div className="hero-meta-row">
                 <div className="hero-meta-item">Location <span>Nairobi, East Africa</span></div>
@@ -382,7 +390,7 @@ export default function App() {
               <p className="about-body-text">I've built production AI tools including <strong>devassist</strong> — a multi-model developer assistant with full OWASP-compliant auth — and <strong>Satellite Council</strong>, a geospatial AI system that fetches real Sentinel-2 satellite imagery, computes NDVI vegetation indices, and runs multi-LLM analysis pipelines.</p>
             </Reveal>
             <Reveal delay={0.5}>
-              <p className="about-body-text">Outside of building, I'm studying for <strong>CompTIA Security+</strong>, exploring <strong>game development</strong> with C++, and going deeper into <strong>AI and LLM APIs</strong>.</p>
+              <p className="about-body-text">Currently studying for <strong>CompTIA Security+</strong>, deepening my work in <strong>remote sensing and environmental AI</strong>, and exploring <strong>game development</strong> with C++.</p>
             </Reveal>
           </div>
         </section>
@@ -414,7 +422,7 @@ export default function App() {
               </div>
             </Reveal>
           ))}
-          <div className="proj-soon">More projects coming soon —</div>
+          <div className="proj-soon">More work in progress —</div>
         </section>
 
         {/* ── SKILLS ── */}

@@ -41,7 +41,6 @@ function Cursor() {
       }
     };
     window.addEventListener("mousemove", move);
-
     let raf;
     const lerp = (a, b, t) => a + (b - a) * t;
     const loop = () => {
@@ -72,7 +71,7 @@ function Cursor() {
 function Nav({ navRef }) {
   return (
     <nav className="nav" ref={navRef}>
-      <div className="nav-left">Issue No. 001 — 2026</div>
+      <div className="nav-left">Issue No. 003 — 2026</div>
       <button className="nav-logo" onClick={() => goTo("home")}>
         CHIRAAG BAROT
       </button>
@@ -175,7 +174,7 @@ function Footer() {
       </div>
       <div className="footer-bottom">
         <span className="footer-bottom-left">
-          CHIRAAG BAROT — WEB & SOFTWARE DEVELOPER — NAIROBI
+          CHIRAAG BAROT — SOFTWARE ENGINEER — NAIROBI
         </span>
       </div>
     </footer>
