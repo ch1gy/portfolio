@@ -25,7 +25,7 @@ const DATA = {
       category: "Personal Project / Geospatial AI",
       desc: "Multi-LLM earth observation tool. Fetches real Sentinel-2 satellite imagery from Microsoft Planetary Computer, computes NDVI vegetation indices, and passes data through a 4-model AI Council — a vision model describes the image, a classifier maps land cover, a synthesizer writes environmental reports, and an evaluator scores confidence. Includes time series change detection across up to 4 dates with pixel-level vegetation gain/loss maps and PDF export with embedded imagery and NDVI charts.",
       tags: ["React", "Python", "Flask", "Sentinel-2", "NDVI", "Ollama", "Kimi K2", "Llama 4", "PDF Export", "Vercel", "Railway"],
-      link: "https://satellite-council.vercel.app/",
+      link: "https://satellite.chigy.dev/",
     },
   ],
   skills: [
@@ -308,7 +308,7 @@ export default function App() {
           </div>
           <div className="hero-body">
             <div className="hero-title-block">
-              <div className="hero-vol">The Developer</div>
+              <div className="hero-vol">The Engineer</div>
               <div className="hero-name-top">CHIRAAG</div>
               <div className="hero-name-bottom">Barot.</div>
             </div>
@@ -362,9 +362,10 @@ export default function App() {
                   <span className="fact-val">Freelance & full-time</span>
                 </div>
                 <div className="about-fact">
-                  <span className="fact-label">Live site</span>
-                  <span className="fact-val">
+                  <span className="fact-label">Live sites</span>
+                  <span className="fact-val" style={{display:"flex",flexDirection:"column",gap:"4px"}}>
                     <a href="https://lubmax.co.ke" className="fact-link" target="_blank" rel="noreferrer">lubmax.co.ke ↗</a>
+                    <a href="https://satellite.chigy.dev" className="fact-link" target="_blank" rel="noreferrer">satellite.chigy.dev ↗</a>
                   </span>
                 </div>
               </div>
