@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 const DATA = {
   email: "brtchigy@gmail.com",
   github: "https://github.com/ch1gy",
-  linkedin: "https://www.linkedin.com/in/chiraag-barot-96a1001b6/",
   cs50cert: "https://certificates.cs50.io/3b57465d-359b-4f43-bd22-1fd0990c31cf.pdf?size=letter",
 };
 
@@ -167,7 +166,6 @@ function Footer() {
       <div className="footer-right">
         <div className="footer-links">
           <a href={DATA.github}   target="_blank" rel="noreferrer" className="footer-link">GitHub ↗</a>
-          <a href={DATA.linkedin} target="_blank" rel="noreferrer" className="footer-link">LinkedIn ↗</a>
           <a href={DATA.cs50cert} target="_blank" rel="noreferrer" className="footer-link">CS50 Certificate ↗</a>
         </div>
         <div className="footer-copy">© 2026 — Chiraag Barot</div>

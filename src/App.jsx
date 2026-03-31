@@ -6,14 +6,21 @@ const DATA = {
   cs50cert: "https://certificates.cs50.io/3b57465d-359b-4f43-bd22-1fd0990c31cf.pdf?size=letter",
   projects: [
     {
-      num: "001", title: "Lubmax East Africa", year: "2024",
-      category: "Client Work / CS50 Final",
-      desc: "Professional website for Lubmax East Africa. A real client, a real deadline, shipped from scratch.",
-      tags: ["HTML", "CSS", "JavaScript"],
-      link: "https://lubmax.co.ke",
+      num: "001", title: "Gnoqe", year: "2026",
+      category: "Personal Project / Desktop AI",
+      desc: "Local-first document intelligence desktop app for Windows. Upload PDFs, PPTX, DOCX, TXT, or CSV — ask questions in plain English, get answers with exact page citations and claim-level confidence scoring (Verified / Inferred / Contradicted / Unverified). Multi-model synthesis pipeline under the hood. Invite-only alpha shipped.",
+      tags: ["Electron", "React", "Python", "Flask", "Qdrant", "Groq", "Jina AI", "Ollama", "PyInstaller", "Supabase"],
+      link: "https://gnoqe.chigy.dev",
     },
     {
-      num: "002", title: "devassist", year: "2026",
+      num: "002", title: "Satellite Council", year: "2026",
+      category: "Personal Project / Geospatial AI",
+      desc: "Multi-LLM earth observation tool. Fetches real Sentinel-2 satellite imagery from Microsoft Planetary Computer, computes NDVI vegetation indices, and passes data through a 4-model AI Council — a vision model describes the image, a classifier maps land cover, a synthesizer writes environmental reports, and an evaluator scores confidence. Includes time series change detection across up to 4 dates with pixel-level vegetation gain/loss maps and PDF export with embedded imagery and NDVI charts.",
+      tags: ["React", "Python", "Flask", "Sentinel-2", "NDVI", "Ollama", "Kimi K2", "Llama 4", "PDF Export", "Vercel", "Railway"],
+      link: "https://satellite.chigy.dev/",
+    },
+    {
+      num: "003", title: "devassist", year: "2026",
       category: "Personal Project / AI Tooling",
       desc: "Multi-model AI developer assistant. Two LLMs answer in parallel, a third synthesises a consensus verdict. Built with production-grade auth — argon2id, HIBP breach detection, JWT rotation, account lockout, and full OWASP Top 10 coverage.",
       tags: ["React", "Python", "Flask", "JWT", "Argon2id", "SQLite", "Groq", "Ollama"],
@@ -21,24 +28,26 @@ const DATA = {
       github: true,
     },
     {
-      num: "003", title: "Satellite Council", year: "2026",
-      category: "Personal Project / Geospatial AI",
-      desc: "Multi-LLM earth observation tool. Fetches real Sentinel-2 satellite imagery from Microsoft Planetary Computer, computes NDVI vegetation indices, and passes data through a 4-model AI Council — a vision model describes the image, a classifier maps land cover, a synthesizer writes environmental reports, and an evaluator scores confidence. Includes time series change detection across up to 4 dates with pixel-level vegetation gain/loss maps and PDF export with embedded imagery and NDVI charts.",
-      tags: ["React", "Python", "Flask", "Sentinel-2", "NDVI", "Ollama", "Kimi K2", "Llama 4", "PDF Export", "Vercel", "Railway"],
-      link: "https://satellite.chigy.dev/",
+      num: "004", title: "Lubmax East Africa", year: "2024",
+      category: "Client Work / CS50 Final",
+      desc: "Professional website for Lubmax East Africa. A real client, a real deadline, shipped from scratch.",
+      tags: ["HTML", "CSS", "JavaScript"],
+      link: "https://lubmax.co.ke",
     },
   ],
   skills: [
-    { name: "Python",                      level: 88 },
-    { name: "AI / LLM APIs",              level: 82 },
-    { name: "HTML / CSS",                 level: 85 },
-    { name: "Flask",                      level: 80 },
-    { name: "JavaScript",                 level: 75 },
-    { name: "React",                      level: 75 },
-    { name: "Sentinel-2 / Remote Sensing",level: 70 },
-    { name: "SQL",                        level: 70 },
-    { name: "Git / GitHub",               level: 72 },
-    { name: "C / C++",                    level: 72 },
+    { name: "Python",                level: 88 },
+    { name: "AI / LLM Pipelines",   level: 85 },
+    { name: "React",                 level: 78 },
+    { name: "Flask",                 level: 80 },
+    { name: "Electron",              level: 75 },
+    { name: "JavaScript",            level: 75 },
+    { name: "HTML / CSS",            level: 85 },
+    { name: "Qdrant / Vector DBs",   level: 72 },
+    { name: "Supabase",              level: 70 },
+    { name: "Git / GitHub",          level: 72 },
+    { name: "PyInstaller",           level: 68 },
+    { name: "C / C++",               level: 72 },
   ],
   exploring: ["CompTIA Security+", "Remote Sensing & Environmental AI", "LLM Pipeline Architecture", "Game Dev (C++)"],
 };
@@ -280,7 +289,7 @@ function SkillBar({ name, level, delay }) {
 }
 
 function Ticker() {
-  const items = ["Software Engineer", "CS50 Graduate", "Python", "Flask", "React", "AI & LLMs", "Geospatial", "Open to Work", "Nairobi, East Africa", "Building Things"];
+  const items = ["Software Engineer", "CS50 Graduate", "Python", "Flask", "React", "Electron", "AI & LLMs", "Desktop Apps", "Nairobi, East Africa", "Building Things"];
   const doubled = [...items, ...items];
   return (
     <div className="ticker">
@@ -314,7 +323,7 @@ export default function App() {
             </div>
             <div className="hero-right">
               <p className="hero-tagline">
-                I build tools that work — from <em>client sites</em> to AI-powered satellite analysis systems.
+                I build tools that work — from <em>client sites</em> to AI-powered desktop applications.
               </p>
               <div className="hero-meta-row">
                 <div className="hero-meta-item">Location <span>Nairobi, East Africa</span></div>
@@ -364,6 +373,7 @@ export default function App() {
                 <div className="about-fact">
                   <span className="fact-label">Live sites</span>
                   <span className="fact-val" style={{display:"flex",flexDirection:"column",gap:"4px"}}>
+                    <a href="https://gnoqe.chigy.dev" className="fact-link" target="_blank" rel="noreferrer">gnoqe.chigy.dev ↗</a>
                     <a href="https://lubmax.co.ke" className="fact-link" target="_blank" rel="noreferrer">lubmax.co.ke ↗</a>
                     <a href="https://satellite.chigy.dev" className="fact-link" target="_blank" rel="noreferrer">satellite.chigy.dev ↗</a>
                   </span>
@@ -386,10 +396,10 @@ export default function App() {
               <p className="about-body-text">My stack is <strong>Python, Flask, and JavaScript</strong>, with a low-level foundation in <strong>C and C++</strong> that makes me think carefully about how things actually work.</p>
             </Reveal>
             <Reveal delay={0.3}>
-              <p className="about-body-text">I built the <strong>Lubmax East Africa</strong> website as a real client project and CS50 final — a real client, a real deadline, shipped from scratch and live at lubmax.co.ke.</p>
+              <p className="about-body-text">My flagship project is <strong>Gnoqe</strong> — a local-first document intelligence desktop app built with Electron, React, and a PyInstaller-bundled Flask backend. It uses Qdrant for vector search, Jina AI embeddings, and a multi-model Groq pipeline to answer questions about your documents with claim-level confidence scoring.</p>
             </Reveal>
             <Reveal delay={0.4}>
-              <p className="about-body-text">I've built production AI tools including <strong>devassist</strong> — a multi-model developer assistant with full OWASP-compliant auth — and <strong>Satellite Council</strong>, a geospatial AI system that fetches real Sentinel-2 satellite imagery, computes NDVI vegetation indices, and runs multi-LLM analysis pipelines.</p>
+              <p className="about-body-text">I've also built production AI tools including <strong>devassist</strong> — a multi-model developer assistant with full OWASP-compliant auth — and <strong>Satellite Council</strong>, a geospatial AI system that fetches real Sentinel-2 satellite imagery, computes NDVI vegetation indices, and runs multi-LLM analysis pipelines.</p>
             </Reveal>
             <Reveal delay={0.5}>
               <p className="about-body-text">Currently studying for <strong>CompTIA Security+</strong>, deepening my work in <strong>remote sensing and environmental AI</strong>, and exploring <strong>game development</strong> with C++.</p>
