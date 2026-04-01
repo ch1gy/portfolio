@@ -36,18 +36,18 @@ const DATA = {
     },
   ],
   skills: [
-    { name: "Python",                level: 88 },
-    { name: "AI / LLM Pipelines",   level: 85 },
-    { name: "React",                 level: 78 },
-    { name: "Flask",                 level: 80 },
-    { name: "Electron",              level: 75 },
-    { name: "JavaScript",            level: 75 },
-    { name: "HTML / CSS",            level: 85 },
-    { name: "Qdrant / Vector DBs",   level: 72 },
-    { name: "Supabase",              level: 70 },
-    { name: "Git / GitHub",          level: 72 },
-    { name: "PyInstaller",           level: 68 },
-    { name: "C / C++",               level: 72 },
+    { name: "Python",              level: 88 },
+    { name: "AI / LLM Pipelines", level: 85 },
+    { name: "Flask",               level: 80 },
+    { name: "Electron",            level: 75 },
+    { name: "React",               level: 78 },
+    { name: "Qdrant / Vector DBs", level: 72 },
+    { name: "JavaScript",          level: 75 },
+    { name: "HTML / CSS",          level: 85 },
+    { name: "C / C++",             level: 72 },
+    { name: "Git / GitHub",        level: 72 },
+    { name: "Supabase",            level: 70 },
+    { name: "PyInstaller",         level: 68 },
   ],
   exploring: ["CompTIA Security+", "Remote Sensing & Environmental AI", "LLM Pipeline Architecture", "Game Dev (C++)"],
 };
@@ -323,7 +323,7 @@ export default function App() {
             </div>
             <div className="hero-right">
               <p className="hero-tagline">
-                I build tools that work — from <em>client sites</em> to AI-powered desktop applications.
+                I build tools that work — from <em>client sites</em> to AI-powered desktop apps and satellite systems.
               </p>
               <div className="hero-meta-row">
                 <div className="hero-meta-item">Location <span>Nairobi, East Africa</span></div>
@@ -434,7 +434,7 @@ export default function App() {
               </div>
             </Reveal>
           ))}
-          <div className="proj-soon">More work in progress —</div>
+          <div className="proj-soon">Next — something with C++.</div>
         </section>
 
         {/* ── SKILLS ── */}
