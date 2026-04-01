@@ -434,7 +434,7 @@ export default function App() {
               </div>
             </Reveal>
           ))}
-          <div className="proj-soon">Next — something with C++.</div>
+          <div className="proj-soon">Next — Machine Learning meets Unreal 5.</div>
         </section>
 
         {/* ── SKILLS ── */}
