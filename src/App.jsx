@@ -49,7 +49,7 @@ const DATA = {
     { name: "Supabase",            level: 70 },
     { name: "PyInstaller",         level: 68 },
   ],
-  exploring: ["CompTIA Security+", "Remote Sensing & Environmental AI", "LLM Pipeline Architecture", "Game Dev (C++)"],
+  exploring: ["Gnoqe — Team & Enterprise Features", "Reinforcement Learning & Multi-Agent Systems", "Unreal 5 & C++ Game Development", "PyTorch & Neural Network Architecture"],
 };
 
 // ── FONTS & PAGE CSS (sections only — layout CSS lives in Layout.jsx) ─────────
@@ -393,16 +393,19 @@ export default function App() {
               <p className="about-pull">"I learned by doing — CS50 gave me the foundations, real projects gave me the rest."</p>
             </Reveal>
             <Reveal delay={0.2}>
-              <p className="about-body-text">My stack is <strong>Python, Flask, and JavaScript</strong>, with a low-level foundation in <strong>C and C++</strong> that makes me think carefully about how things actually work.</p>
+              <p className="about-body-text">I learn by <strong>building, not watching.</strong> CS50 worked because every concept came with something to make — that's been my approach ever since. Every tool I know, I learned by needing it for a real project and going deep until it worked.</p>
             </Reveal>
             <Reveal delay={0.3}>
-              <p className="about-body-text">My flagship project is <strong>Gnoqe</strong> — a local-first document intelligence desktop app built with Electron, React, and a PyInstaller-bundled Flask backend. It uses Qdrant for vector search, Jina AI embeddings, and a multi-model Groq pipeline to answer questions about your documents with claim-level confidence scoring.</p>
+              <p className="about-body-text">My stack is <strong>Python, Flask, and JavaScript</strong>, with a low-level foundation in <strong>C and C++</strong> that makes me think carefully about how things actually work.</p>
             </Reveal>
             <Reveal delay={0.4}>
-              <p className="about-body-text">I've also built production AI tools including <strong>devassist</strong> — a multi-model developer assistant with full OWASP-compliant auth — and <strong>Satellite Council</strong>, a geospatial AI system that fetches real Sentinel-2 satellite imagery, computes NDVI vegetation indices, and runs multi-LLM analysis pipelines.</p>
+              <p className="about-body-text">My flagship project is <strong>Gnoqe</strong> — a local-first document intelligence desktop app built with Electron, React, and a PyInstaller-bundled Flask backend. It uses Qdrant for vector search, Jina AI embeddings, and a multi-model Groq pipeline to answer questions about your documents with claim-level confidence scoring.</p>
             </Reveal>
             <Reveal delay={0.5}>
-              <p className="about-body-text">Currently studying for <strong>CompTIA Security+</strong>, deepening my work in <strong>remote sensing and environmental AI</strong>, and exploring <strong>game development</strong> with C++.</p>
+              <p className="about-body-text">I've also built production AI tools including <strong>devassist</strong> — a multi-model developer assistant with full OWASP-compliant auth — and <strong>Satellite Council</strong>, a geospatial AI system that fetches real Sentinel-2 satellite imagery, computes NDVI vegetation indices, and runs multi-LLM analysis pipelines.</p>
+            </Reveal>
+            <Reveal delay={0.6}>
+              <p className="about-body-text">Currently exploring <strong>reinforcement learning and multi-agent systems</strong>, diving into <strong>PyTorch</strong>, and building toward a project where machine learning meets <strong>Unreal 5 game development.</strong></p>
             </Reveal>
           </div>
         </section>
