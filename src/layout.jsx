@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
 const DATA = {
-  email: "brtchigy@gmail.com",
+  email: "hello@chigy.dev",
   github: "https://github.com/ch1gy",
   cs50cert: "https://certificates.cs50.io/3b57465d-359b-4f43-bd22-1fd0990c31cf.pdf?size=letter",
 };
