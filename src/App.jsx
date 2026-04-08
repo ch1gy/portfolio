@@ -381,7 +381,7 @@ export default function App() {
               </div>
             </div>
             <div className="lang-tag-row">
-              {["English", "Gujarati", "Swahili"].map(l => (
+              {["English"].map(l => (
                 <span key={l} className="lang-tag">{l}</span>
               ))}
             </div>
