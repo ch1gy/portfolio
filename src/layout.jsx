@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from "react";
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
 const DATA = {
-  email: "hello@chigy.dev",
+  email: "brtchigy@gmail.com",
   github: "https://github.com/ch1gy",
+  linkedin: "https://www.linkedin.com/in/chiraag-barot-96a1001b6/",
   cs50cert: "https://certificates.cs50.io/3b57465d-359b-4f43-bd22-1fd0990c31cf.pdf?size=letter",
 };
 
@@ -166,6 +167,7 @@ function Footer() {
       <div className="footer-right">
         <div className="footer-links">
           <a href={DATA.github}   target="_blank" rel="noreferrer" className="footer-link">GitHub ↗</a>
+          <a href={DATA.linkedin} target="_blank" rel="noreferrer" className="footer-link">LinkedIn ↗</a>
           <a href={DATA.cs50cert} target="_blank" rel="noreferrer" className="footer-link">CS50 Certificate ↗</a>
         </div>
         <div className="footer-copy">© 2026 — Chiraag Barot</div>
@@ -183,25 +185,7 @@ function Footer() {
 const LAYOUT_CSS = `
 
   /* ── CUSTOM CURSOR ── */
-  .cursor {
-    position: fixed; z-index: 9999; pointer-events: none;
-    width: 12px; height: 12px;
-    background: var(--red); border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width .3s, height .3s;
-    mix-blend-mode: multiply;
-  }
-  .cursor-ring {
-    position: fixed; z-index: 9998; pointer-events: none;
-    width: 40px; height: 40px;
-    border: 1px solid var(--ink); border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width .35s, height .35s, border-color .3s;
-  }
-  body:has(a:hover) .cursor,
-  body:has(button:hover) .cursor { width: 32px; height: 32px; }
-  body:has(a:hover) .cursor-ring,
-  body:has(button:hover) .cursor-ring { width: 64px; height: 64px; border-color: var(--red); }
+  .cursor, .cursor-ring { display: none; }
 
   /* ── NAV ── */
   .nav {
@@ -222,7 +206,7 @@ const LAYOUT_CSS = `
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
 
   /* ── CORNER FOLD BUTTON ── */
-  .fold-btn { display: none; position: fixed; top: 0; right: 0; z-index: 600; width: 64px; height: 64px; cursor: none; background: none; border: none; }
+  .fold-btn { display: none; position: fixed; top: 0; right: 0; z-index: 600; width: 64px; height: 64px; background: none; border: none; }
   .fold-btn::before { content: ''; position: absolute; top: 0; right: 0; border-style: solid; border-width: 0 64px 64px 0; border-color: transparent var(--ink) transparent transparent; }
   .fold-lines { position: absolute; top: 10px; right: 8px; display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
   .fold-line { height: 1.5px; background: var(--cream); transform-origin: right center; transition: transform .35s ease, width .3s ease; }
@@ -295,7 +279,6 @@ const LAYOUT_CSS = `
     .footer { padding: 80px 120px; }
   }
   @media (max-width: 768px) {
-    body { cursor: auto; }
     .cursor, .cursor-ring { display: none; }
     .nav { padding: 14px 20px; grid-template-columns: 1fr auto; }
     .nav-left, .nav-right { display: none; }
@@ -332,7 +315,6 @@ export default function Layout({ children }) {
   return (
     <>
       <style>{LAYOUT_CSS}</style>
-      <Cursor />
       <MobileMenu />
       <ScrollTop />
       <Nav navRef={navRef} />

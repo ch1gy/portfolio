@@ -6,21 +6,14 @@ const DATA = {
   cs50cert: "https://certificates.cs50.io/3b57465d-359b-4f43-bd22-1fd0990c31cf.pdf?size=letter",
   projects: [
     {
-      num: "001", title: "Gnoqe", year: "2026",
-      category: "Personal Project / Desktop AI",
-      desc: "Local-first document intelligence desktop app for Windows. Upload PDFs, PPTX, DOCX, TXT, or CSV — ask questions in plain English, get answers with exact page citations and claim-level confidence scoring (Verified / Inferred / Contradicted / Unverified). Multi-model synthesis pipeline under the hood. Invite-only alpha shipped.",
-      tags: ["Electron", "React", "Python", "Flask", "Qdrant", "Groq", "Jina AI", "Ollama", "PyInstaller", "Supabase"],
-      link: "https://gnoqe.chigy.dev",
+      num: "001", title: "Lubmax East Africa", year: "2024",
+      category: "Client Work / CS50 Final",
+      desc: "Professional website for Lubmax East Africa. A real client, a real deadline, shipped from scratch.",
+      tags: ["HTML", "CSS", "JavaScript"],
+      link: "https://lubmax.co.ke",
     },
     {
-      num: "002", title: "Satellite Council", year: "2026",
-      category: "Personal Project / Geospatial AI",
-      desc: "Multi-LLM earth observation tool. Fetches real Sentinel-2 satellite imagery from Microsoft Planetary Computer, computes NDVI vegetation indices, and passes data through a 4-model AI Council — a vision model describes the image, a classifier maps land cover, a synthesizer writes environmental reports, and an evaluator scores confidence. Includes time series change detection across up to 4 dates with pixel-level vegetation gain/loss maps and PDF export with embedded imagery and NDVI charts.",
-      tags: ["React", "Python", "Flask", "Sentinel-2", "NDVI", "Ollama", "Kimi K2", "Llama 4", "PDF Export", "Vercel", "Railway"],
-      link: "https://satellite.chigy.dev/",
-    },
-    {
-      num: "003", title: "devassist", year: "2026",
+      num: "002", title: "devassist", year: "2026",
       category: "Personal Project / AI Tooling",
       desc: "Multi-model AI developer assistant. Two LLMs answer in parallel, a third synthesises a consensus verdict. Built with production-grade auth — argon2id, HIBP breach detection, JWT rotation, account lockout, and full OWASP Top 10 coverage.",
       tags: ["React", "Python", "Flask", "JWT", "Argon2id", "SQLite", "Groq", "Ollama"],
@@ -28,28 +21,26 @@ const DATA = {
       github: true,
     },
     {
-      num: "004", title: "Lubmax East Africa", year: "2024",
-      category: "Client Work / CS50 Final",
-      desc: "Professional website for Lubmax East Africa. A real client, a real deadline, shipped from scratch.",
-      tags: ["HTML", "CSS", "JavaScript"],
-      link: "https://lubmax.co.ke",
+      num: "003", title: "Satellite Council", year: "2026",
+      category: "Personal Project / Geospatial AI",
+      desc: "Multi-LLM earth observation tool. Fetches real Sentinel-2 satellite imagery from Microsoft Planetary Computer, computes NDVI vegetation indices, and passes data through a 4-model AI Council — a vision model describes the image, a classifier maps land cover, a synthesizer writes environmental reports, and an evaluator scores confidence. Includes time series change detection across up to 4 dates with pixel-level vegetation gain/loss maps and PDF export with embedded imagery and NDVI charts.",
+      tags: ["React", "Python", "Flask", "Sentinel-2", "NDVI", "Ollama", "Kimi K2", "Llama 4", "PDF Export", "Vercel", "Railway"],
+      link: "https://satellite.chigy.dev/",
     },
   ],
   skills: [
-    { name: "Python",              level: 88 },
-    { name: "AI / LLM Pipelines", level: 85 },
-    { name: "Flask",               level: 80 },
-    { name: "Electron",            level: 75 },
-    { name: "React",               level: 78 },
-    { name: "Qdrant / Vector DBs", level: 72 },
-    { name: "JavaScript",          level: 75 },
-    { name: "HTML / CSS",          level: 85 },
-    { name: "C / C++",             level: 72 },
-    { name: "Git / GitHub",        level: 72 },
-    { name: "Supabase",            level: 70 },
-    { name: "PyInstaller",         level: 68 },
+    { name: "Python",                      level: 88 },
+    { name: "AI / LLM APIs",              level: 82 },
+    { name: "HTML / CSS",                 level: 85 },
+    { name: "Flask",                      level: 80 },
+    { name: "JavaScript",                 level: 75 },
+    { name: "React",                      level: 75 },
+    { name: "Sentinel-2 / Remote Sensing",level: 70 },
+    { name: "SQL",                        level: 70 },
+    { name: "Git / GitHub",               level: 72 },
+    { name: "C / C++",                    level: 72 },
   ],
-  exploring: ["Gnoqe — Team & Enterprise Features", "Reinforcement Learning & Multi-Agent Systems", "Unreal 5 & C++ Game Development", "PyTorch & Neural Network Architecture"],
+  exploring: ["CompTIA Security+", "Remote Sensing & Environmental AI", "LLM Pipeline Architecture", "Game Dev (C++)"],
 };
 
 // ── FONTS & PAGE CSS (sections only — layout CSS lives in Layout.jsx) ─────────
@@ -71,13 +62,22 @@ const CSS = `
   }
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { background: var(--cream); color: var(--ink); font-family: var(--serif); overflow-x: hidden; cursor: none; }
+  body { background: var(--cream); color: var(--ink); font-family: var(--serif); overflow-x: hidden; }
   body::before {
     content: ''; position: fixed; inset: 0; z-index: 1000; pointer-events: none; opacity: .03;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 200px;
   }
 
+
+  /* ── DUCK CURSOR ── */
+  .duck-mode * { cursor: none !important; }
+  .duck-cursor {
+    position: fixed; z-index: 99999; pointer-events: none;
+    width: 32px; height: 32px;
+    image-rendering: pixelated;
+    transform: translate(-4px, -4px);
+  }
   /* ── HERO ── */
   .hero {
     padding: 32px 48px 56px;
@@ -99,9 +99,9 @@ const CSS = `
   .hero-meta-item { font-family: var(--mono); font-size: 10px; color: var(--mid); letter-spacing: .1em; text-transform: uppercase; display: flex; gap: 16px; }
   .hero-meta-item span { color: var(--ink); }
   .hero-cta-row { display: flex; gap: 16px; align-items: center; padding-top: 16px; border-top: 1px solid var(--rule); }
-  .btn-primary { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; background: var(--ink); color: var(--cream); border: none; padding: 14px 28px; cursor: none; transition: background .2s; }
+  .btn-primary { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; background: var(--ink); color: var(--cream); border: none; padding: 14px 28px; transition: background .2s; }
   .btn-primary:hover { background: var(--red); }
-  .btn-text { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; color: var(--mid); background: none; border: none; cursor: none; transition: color .2s; }
+  .btn-text { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; color: var(--mid); background: none; border: none; transition: color .2s; }
   .btn-text:hover { color: var(--ink); }
   .hero-footer { display: flex; justify-content: space-between; align-items: flex-end; padding-top: 24px; border-top: 1px solid var(--rule); margin-top: auto; }
   .hero-scroll { font-family: var(--mono); font-size: 10px; color: var(--mid); letter-spacing: .12em; text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
@@ -289,7 +289,7 @@ function SkillBar({ name, level, delay }) {
 }
 
 function Ticker() {
-  const items = ["Software Engineer", "CS50 Graduate", "Python", "Flask", "React", "Electron", "AI & LLMs", "Desktop Apps", "Nairobi, East Africa", "Building Things"];
+  const items = ["Software Engineer", "CS50 Graduate", "Python", "Flask", "React", "AI & LLMs", "Geospatial", "Open to Work", "Nairobi, East Africa", "Building Things"];
   const doubled = [...items, ...items];
   return (
     <div className="ticker">
@@ -302,11 +302,141 @@ function Ticker() {
   );
 }
 
+
+
+// ── DUCK CURSOR ───────────────────────────────────────────────────────────────
+const DUCK_CURSOR_SRC = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAAEVklEQVR4nO2WS6hVVRjHf+tbr3POvde4+SpfpPbQhAhCMshKbBA0KXpgULMGjqWgeTVvVoHgRISooEkjB0EJDqSICKKHaEp49aYe73nssx9rfQ1MTdHj9SQ48T/ag+/x+/577W8vuKs7LDNJ0jvrt+gLa9bSHVlePfL1RDUuSSZJmu0os80pQrv3f3oD4CZJ6lRKlIqZ0gPw/qaNumPlcg6J571vvrslR8YCbNu2TCUVSI6ULlOFLtMF6PRpTmqLou4DsMJGNhSGX4ZztzzMWNoDnz6lS90xAGy5mign2PT4LCOFqugwFWuCG9HbB8WRJfz9cJ81e5Siv57NOw4uyomxDixxEalbfHboFHv3zxmA+W+XqjfClB1R54bY96RXplj9Yo9VQelWSjTtRc5/E4BReYGaguncAUoAEhFUSKagtJbgZ8i2z5l2G1IgpgWSHU0GsH/PVt3Smee+fIGua3OmOU+3pby8fQkvbW9p5YaM4gKtOqIKaMXIdompRdPqY+tAq/IUEiYD6J48y8/945ycgtScZ+XT6/BtYWhrjBmieEJpyTRkwCWLoowo0NJDTgxsom+byQDm9H7ytCN3FG0GzLamwAxBHartf8M71y0kJJK1lOLxyS4aYOxJ/WrvdnV6FEuFyQFRIZnyqrYXlQk50RhP6RocQx7duJPDv0be2P3l2B5jD2HNNK3kwRYoFkwJ5P9EXHlW0wAWnwRvKoL9De3efNGOBWilkk6TGFihtIHAkCc2L7tubDYOyLgMsIJExTNb2/z0+Qad51l2vrbvuk6MBZBQMDABpzVJKkISsqn48Ycev/9xjjJlSAaDIkAy0MjFom+9+QAMaiRHQhpM5kDTNHhVFEVV0WxIzTRae4YXMi440DbIAM0WjENMRuQsklqIDDB2gFLesMet/YxMjYs9kqmILSGTUE0YGYGAGo/JEasByRGyu2iL3vgsjAUw5trXZsnawjtHk0swBtSg6jAqqBFEG9SMMDHRVJmT5+bo1qtukwMqBH8PSc+RtcR5hSwgitGEQcFkMAnjA70qkP1GvL33xkOO6/fFJ0/qlPxJsjWdMpKMgIwu7gMihQ3YbBCgtjWWAbGaQbUD7jTn9CF27T48+R5oV5HgPH0rNDYztJ6YA8Y0KDViFJFMzAW+XE7jE2XoIblBcNTEceVvDlCGAY0vsdnRqRsSbZAGSQ5rCkItLPg2tfVEmUelweZIyEOGrk2r1JsCLOrS8O7za/TtrQVBhlRpCR9/P81HB49ezt37+qw+t34FgS5ZaubtI2z9YLz1l7SoS6nNwlSdiI0F04BebVwhMzTxNMktYDUT9MaL51ot6itQhJ6PBIFEIsnV3F4LYjUNJjIMA5K5TQAf7npM14XzLG1O8dfxEgwkgQfsg5djDuxeq7G3wLETZ3E5A8IF1789AEYiyc8wCG3OFH1Kozib0M4VB/ywprJrmMtdjGTUwMDOAKcXDXFXd1T/AAGb77Os7yKZAAAAAElFTkSuQmCC';
+
+function DuckCursor({ active }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (!active) return;
+    const move = e => {
+      if (ref.current) {
+        ref.current.style.left = e.clientX + 'px';
+        ref.current.style.top  = e.clientY + 'px';
+      }
+    };
+    window.addEventListener('mousemove', move);
+    return () => window.removeEventListener('mousemove', move);
+  }, [active]);
+
+  if (!active) return null;
+
+  return (
+    <img
+      ref={ref}
+      src={DUCK_CURSOR_SRC}
+      alt=""
+      className="duck-cursor"
+      style={{ position: 'fixed', left: -100, top: -100 }}
+    />
+  );
+}
+
+// ── DUCK ──────────────────────────────────────────────────────────────────────
+const DUCK_IMGS = {
+  back:  'data:image/png;base64,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',
+  front: 'data:image/png;base64,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',
+  right: 'data:image/png;base64,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',
+};
+
+function Duck({ onActivate }) {
+  const [state, setState]   = useState('hidden');
+  const [edge, setEdge]     = useState('left');
+  const [frame, setFrame]   = useState('front');
+  const [pos, setPos]       = useState('50%');
+  const timerRef            = useRef(null);
+  const SIZE                = 48;
+
+  const scheduleNext = () => {
+    const delay = 2000 + Math.random() * 4000;
+    timerRef.current = setTimeout(startSequence, delay);
+  };
+
+  const startSequence = () => {
+    const edges = ['left', 'right', 'bottom', 'top'];
+    const chosen = edges[Math.floor(Math.random() * edges.length)];
+    const randPos = `${15 + Math.random() * 70}%`;
+    setEdge(chosen);
+    setPos(randPos);
+    // sprite direction: left edge = right sprite, right = right flipped, top/bottom = front
+    setFrame(chosen === 'left' ? 'right' : chosen === 'right' ? 'right' : chosen === 'top' ? 'front' : 'front');
+    setState('peeking');
+
+    timerRef.current = setTimeout(() => {
+      setState('watching');
+      const watchTime = 1200 + Math.random() * 1800;
+      timerRef.current = setTimeout(() => {
+        setState('leaving');
+        timerRef.current = setTimeout(() => {
+          setState('hidden');
+          scheduleNext();
+        }, 500);
+      }, watchTime);
+    }, 500);
+  };
+
+  useEffect(() => {
+    scheduleNext();
+    return () => clearTimeout(timerRef.current);
+  }, []);
+
+  if (state === 'hidden') return null;
+
+  const base = {
+    position: 'fixed',
+    zIndex: 9990,
+    pointerEvents: 'none',
+    imageRendering: 'pixelated',
+    width: SIZE,
+    height: 'auto',
+    transition: 'transform 0.45s cubic-bezier(.4,0,.2,1), opacity 0.3s',
+  };
+
+  const styles = {
+    left: {
+      peeking: { ...base, left: 0, top: pos, transform: 'translateX(-70%)', opacity: 1 },
+      watching:{ ...base, left: 0, top: pos, transform: 'translateX(6px)',   opacity: 1 },
+      leaving: { ...base, left: 0, top: pos, transform: 'translateX(-100%)', opacity: 0 },
+    },
+    right: {
+      peeking: { ...base, right: 0, top: pos, transform: 'translateX(70%) scaleX(-1)',  opacity: 1 },
+      watching:{ ...base, right: 0, top: pos, transform: 'translateX(-6px) scaleX(-1)', opacity: 1 },
+      leaving: { ...base, right: 0, top: pos, transform: 'translateX(100%) scaleX(-1)', opacity: 0 },
+    },
+    bottom: {
+      peeking: { ...base, bottom: 0, left: pos, transform: 'translateY(70%)',  opacity: 1 },
+      watching:{ ...base, bottom: 0, left: pos, transform: 'translateY(-6px)', opacity: 1 },
+      leaving: { ...base, bottom: 0, left: pos, transform: 'translateY(100%)', opacity: 0 },
+    },
+    top: {
+      peeking: { ...base, top: 0, left: pos, transform: 'translateY(-70%) scaleY(-1)',  opacity: 1 },
+      watching:{ ...base, top: 0, left: pos, transform: 'translateY(6px) scaleY(-1)',   opacity: 1 },
+      leaving: { ...base, top: 0, left: pos, transform: 'translateY(-100%) scaleY(-1)', opacity: 0 },
+    },
+  };
+
+  return (
+    <img
+      src={DUCK_IMGS[frame]}
+      alt="duck"
+      title="🦆"
+      style={{ ...styles[edge][state], cursor: 'pointer', pointerEvents: 'all' }}
+      onClick={onActivate}
+    />
+  );
+}
+
 // ── APP ───────────────────────────────────────────────────────────────────────
 export default function App() {
+  const [duckMode, setDuckMode] = useState(false);
+
   return (
     <>
       <style>{FONTS + CSS}</style>
+      {duckMode && <style>{'* { cursor: none !important; }'}</style>}
       <Layout>
 
         {/* ── HERO ── */}
@@ -323,7 +453,7 @@ export default function App() {
             </div>
             <div className="hero-right">
               <p className="hero-tagline">
-                I build tools that work — from <em>client sites</em> to AI-powered desktop apps and satellite systems.
+                I build tools that work — from <em>client sites</em> to AI-powered satellite analysis systems.
               </p>
               <div className="hero-meta-row">
                 <div className="hero-meta-item">Location <span>Nairobi, East Africa</span></div>
@@ -373,7 +503,6 @@ export default function App() {
                 <div className="about-fact">
                   <span className="fact-label">Live sites</span>
                   <span className="fact-val" style={{display:"flex",flexDirection:"column",gap:"4px"}}>
-                    <a href="https://gnoqe.chigy.dev" className="fact-link" target="_blank" rel="noreferrer">gnoqe.chigy.dev ↗</a>
                     <a href="https://lubmax.co.ke" className="fact-link" target="_blank" rel="noreferrer">lubmax.co.ke ↗</a>
                     <a href="https://satellite.chigy.dev" className="fact-link" target="_blank" rel="noreferrer">satellite.chigy.dev ↗</a>
                   </span>
@@ -381,7 +510,7 @@ export default function App() {
               </div>
             </div>
             <div className="lang-tag-row">
-              {["English"].map(l => (
+              {["English", "Gujarati", "Swahili"].map(l => (
                 <span key={l} className="lang-tag">{l}</span>
               ))}
             </div>
@@ -393,19 +522,16 @@ export default function App() {
               <p className="about-pull">"I learned by doing — CS50 gave me the foundations, real projects gave me the rest."</p>
             </Reveal>
             <Reveal delay={0.2}>
-              <p className="about-body-text">I learn by <strong>building, not watching.</strong> CS50 worked because every concept came with something to make — that's been my approach ever since. Every tool I know, I learned by needing it for a real project and going deep until it worked.</p>
-            </Reveal>
-            <Reveal delay={0.3}>
               <p className="about-body-text">My stack is <strong>Python, Flask, and JavaScript</strong>, with a low-level foundation in <strong>C and C++</strong> that makes me think carefully about how things actually work.</p>
             </Reveal>
+            <Reveal delay={0.3}>
+              <p className="about-body-text">I built the <strong>Lubmax East Africa</strong> website as a real client project and CS50 final — a real client, a real deadline, shipped from scratch and live at lubmax.co.ke.</p>
+            </Reveal>
             <Reveal delay={0.4}>
-              <p className="about-body-text">My flagship project is <strong>Gnoqe</strong> — a local-first document intelligence desktop app built with Electron, React, and a PyInstaller-bundled Flask backend. It uses Qdrant for vector search, Jina AI embeddings, and a multi-model Groq pipeline to answer questions about your documents with claim-level confidence scoring.</p>
+              <p className="about-body-text">I've built production AI tools including <strong>devassist</strong> — a multi-model developer assistant with full OWASP-compliant auth — and <strong>Satellite Council</strong>, a geospatial AI system that fetches real Sentinel-2 satellite imagery, computes NDVI vegetation indices, and runs multi-LLM analysis pipelines.</p>
             </Reveal>
             <Reveal delay={0.5}>
-              <p className="about-body-text">I've also built production AI tools including <strong>devassist</strong> — a multi-model developer assistant with full OWASP-compliant auth — and <strong>Satellite Council</strong>, a geospatial AI system that fetches real Sentinel-2 satellite imagery, computes NDVI vegetation indices, and runs multi-LLM analysis pipelines.</p>
-            </Reveal>
-            <Reveal delay={0.6}>
-              <p className="about-body-text">Currently exploring <strong>reinforcement learning and multi-agent systems</strong>, diving into <strong>PyTorch</strong>, and building toward a project where machine learning meets <strong>Unreal 5 game development.</strong></p>
+              <p className="about-body-text">Currently studying for <strong>CompTIA Security+</strong>, deepening my work in <strong>remote sensing and environmental AI</strong>, and exploring <strong>game development</strong> with C++.</p>
             </Reveal>
           </div>
         </section>
@@ -437,7 +563,7 @@ export default function App() {
               </div>
             </Reveal>
           ))}
-          <div className="proj-soon">Next — Machine Learning meets Unreal 5.</div>
+          <div className="proj-soon">More work in progress —</div>
         </section>
 
         {/* ── SKILLS ── */}
@@ -470,6 +596,8 @@ export default function App() {
           </div>
         </section>
 
+        <Duck onActivate={() => setDuckMode(true)} />
+        <DuckCursor active={duckMode} />
       </Layout>
     </>
   );
