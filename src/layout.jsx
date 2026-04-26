@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
 const DATA = {
@@ -19,67 +20,40 @@ export function goTo(id, closeMenu) {
 }
 
 const NAV_LINKS = [
-  { label: "About",   id: "about"    },
-  { label: "Work",    id: "projects" },
-  { label: "Skills",  id: "skills"   },
-  { label: "Contact", id: "contact"  },
+  { label: "About",    id: "about"    },
+  { label: "Work",     id: "projects" },
+  { label: "Skills",   id: "skills"   },
+  { label: "Contact",  id: "contact"  },
 ];
 
-// ── CUSTOM CURSOR ─────────────────────────────────────────────────────────────
-function Cursor() {
-  const dot  = useRef(null);
-  const ring = useRef(null);
-  const pos  = useRef({ x: 0, y: 0 });
-  const ringPos = useRef({ x: 0, y: 0 });
+const PAGE_LINKS = [
+  { label: "Roadmap", to: "/roadmap" },
+];
 
-  useEffect(() => {
-    const move = (e) => {
-      pos.current = { x: e.clientX, y: e.clientY };
-      if (dot.current) {
-        dot.current.style.left = e.clientX + "px";
-        dot.current.style.top  = e.clientY + "px";
-      }
-    };
-    window.addEventListener("mousemove", move);
-    let raf;
-    const lerp = (a, b, t) => a + (b - a) * t;
-    const loop = () => {
-      ringPos.current.x = lerp(ringPos.current.x, pos.current.x, 0.12);
-      ringPos.current.y = lerp(ringPos.current.y, pos.current.y, 0.12);
-      if (ring.current) {
-        ring.current.style.left = ringPos.current.x + "px";
-        ring.current.style.top  = ringPos.current.y + "px";
-      }
-      raf = requestAnimationFrame(loop);
-    };
-    loop();
-    return () => {
-      window.removeEventListener("mousemove", move);
-      cancelAnimationFrame(raf);
-    };
-  }, []);
-
+// ── NAV ───────────────────────────────────────────────────────────────────────
+function ScrollNavLink({ label, id }) {
+  const { pathname } = useLocation();
+  const handleClick = (e) => {
+    if (pathname === "/") { e.preventDefault(); goTo(id); }
+  };
   return (
-    <>
-      <div ref={dot}  className="cursor" />
-      <div ref={ring} className="cursor-ring" />
-    </>
+    <a href={`/#${id}`} className="nav-link" onClick={handleClick}>
+      {label}
+    </a>
   );
 }
 
-// ── NAV ───────────────────────────────────────────────────────────────────────
 function Nav({ navRef }) {
   return (
     <nav className="nav" ref={navRef}>
-      <div className="nav-left">Issue No. 003 — 2026</div>
-      <button className="nav-logo" onClick={() => goTo("home")}>
-        CHIRAAG BAROT
-      </button>
+      <div className="nav-left">Issue No. 004 — 2026</div>
+      <Link to="/" className="nav-logo">CHIRAAG BAROT</Link>
       <div className="nav-right">
         {NAV_LINKS.map(l => (
-          <button key={l.id} className="nav-link" onClick={() => goTo(l.id)}>
-            {l.label}
-          </button>
+          <ScrollNavLink key={l.id} label={l.label} id={l.id} />
+        ))}
+        {PAGE_LINKS.map(l => (
+          <Link key={l.to} to={l.to} className="nav-link">{l.label}</Link>
         ))}
         <div className="nav-avail">
           <span className="avail-dot" />Available
@@ -90,6 +64,19 @@ function Nav({ navRef }) {
 }
 
 // ── MOBILE MENU ───────────────────────────────────────────────────────────────
+function MobileScrollLink({ label, id, close }) {
+  const { pathname } = useLocation();
+  const handleClick = (e) => {
+    if (pathname === "/") { e.preventDefault(); goTo(id, close); }
+    else close();
+  };
+  return (
+    <a href={`/#${id}`} className="mobile-panel-link" onClick={handleClick}>
+      {label}
+    </a>
+  );
+}
+
 function MobileMenu() {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
@@ -115,13 +102,12 @@ function MobileMenu() {
       <div className={`mobile-panel${open ? " open" : ""}`}>
         <nav className="mobile-panel-links">
           {NAV_LINKS.map(l => (
-            <button
-              key={l.id}
-              className="mobile-panel-link"
-              onClick={() => goTo(l.id, close)}
-            >
+            <MobileScrollLink key={l.id} label={l.label} id={l.id} close={close} />
+          ))}
+          {PAGE_LINKS.map(l => (
+            <Link key={l.to} to={l.to} className="mobile-panel-link" onClick={close}>
               {l.label}
-            </button>
+            </Link>
           ))}
         </nav>
         <div className="mobile-panel-bottom">
@@ -170,7 +156,7 @@ function Footer() {
           <a href={DATA.linkedin} target="_blank" rel="noreferrer" className="footer-link">LinkedIn ↗</a>
           <a href={DATA.cs50cert} target="_blank" rel="noreferrer" className="footer-link">CS50 Certificate ↗</a>
         </div>
-        <div className="footer-copy">© 2026 — Chiraag Barot</div>
+        <div className="footer-copy">© {new Date().getFullYear()} — Chiraag Barot</div>
       </div>
       <div className="footer-bottom">
         <span className="footer-bottom-left">
@@ -183,9 +169,30 @@ function Footer() {
 
 // ── LAYOUT CSS ────────────────────────────────────────────────────────────────
 const LAYOUT_CSS = `
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap');
 
-  /* ── CUSTOM CURSOR ── */
-  .cursor, .cursor-ring { display: none; }
+  /* ── BASE ── */
+  :root {
+    --cream: #f2ede4;
+    --ink:   #0d0d0d;
+    --red:   #c8322a;
+    --mid:   #6a6560;
+    --rule:  #c8c2b8;
+    --serif:   'Playfair Display', serif;
+    --display: 'Bebas Neue', sans-serif;
+    --mono:    'DM Mono', monospace;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--ink); font-family: var(--serif); overflow-x: hidden; }
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 1000; pointer-events: none; opacity: .03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px;
+  }
+  .section-label { font-family: var(--mono); font-size: 10px; color: var(--red); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 32px; display: flex; align-items: center; gap: 12px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+  .red { color: var(--red); }
 
   /* ── NAV ── */
   .nav {
@@ -197,9 +204,9 @@ const LAYOUT_CSS = `
     backdrop-filter: blur(12px);
   }
   .nav-left { font-family: var(--mono); font-size: 10px; color: var(--mid); letter-spacing: .12em; text-transform: uppercase; }
-  .nav-logo { font-family: var(--display); font-size: 22px; letter-spacing: .05em; text-align: center; color: var(--ink); background: none; border: none; cursor: none; }
+  .nav-logo { font-family: var(--display); font-size: 22px; letter-spacing: .05em; text-align: center; color: var(--ink); background: none; border: none; cursor: pointer; text-decoration: none; }
   .nav-right { display: flex; justify-content: flex-end; align-items: center; gap: 32px; }
-  .nav-link { font-family: var(--mono); font-size: 10px; color: var(--mid); letter-spacing: .1em; text-transform: uppercase; background: none; border: none; cursor: none; transition: color .2s; }
+  .nav-link { font-family: var(--mono); font-size: 10px; color: var(--mid); letter-spacing: .1em; text-transform: uppercase; background: none; border: none; cursor: pointer; transition: color .2s; text-decoration: none; }
   .nav-link:hover { color: var(--red); }
   .nav-avail { display: flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 10px; color: var(--red); letter-spacing: .1em; }
   .avail-dot { width: 5px; height: 5px; background: var(--red); border-radius: 50%; animation: blink 2s ease-in-out infinite; }
@@ -230,15 +237,17 @@ const LAYOUT_CSS = `
     font-family: var(--display); font-size: clamp(48px,12vw,80px);
     color: rgba(255,255,255,0.2); background: none; border: none;
     border-bottom: 1px solid rgba(255,255,255,0.08);
-    text-align: left; padding: 20px 0; cursor: none;
+    text-align: left; padding: 20px 0; cursor: pointer;
     opacity: 0; transform: translateX(32px);
     transition: opacity .4s ease, transform .4s ease, color .2s;
+    text-decoration: none; display: block;
   }
   .mobile-panel.open .mobile-panel-link { opacity: 1; transform: translateX(0); }
   .mobile-panel.open .mobile-panel-link:nth-child(1) { transition-delay: .15s; }
   .mobile-panel.open .mobile-panel-link:nth-child(2) { transition-delay: .22s; }
   .mobile-panel.open .mobile-panel-link:nth-child(3) { transition-delay: .29s; }
   .mobile-panel.open .mobile-panel-link:nth-child(4) { transition-delay: .36s; }
+  .mobile-panel.open .mobile-panel-link:nth-child(5) { transition-delay: .43s; }
   .mobile-panel-link:hover { color: rgba(255,255,255,0.9); }
   .mobile-panel-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
   .mobile-panel-email { font-family: var(--mono); font-size: 12px; color: rgba(255,255,255,0.35); letter-spacing: .08em; text-decoration: none; opacity: 0; transition: opacity .4s ease .45s; }
@@ -250,7 +259,7 @@ const LAYOUT_CSS = `
   .scroll-top {
     position: fixed; bottom: 32px; right: 32px; z-index: 150;
     width: 44px; height: 44px; background: var(--ink); color: var(--cream);
-    border: none; cursor: none; font-family: var(--mono); font-size: 16px;
+    border: none; cursor: pointer; font-family: var(--mono); font-size: 16px;
     display: flex; align-items: center; justify-content: center;
     transition: opacity .3s, transform .3s;
   }
@@ -279,7 +288,6 @@ const LAYOUT_CSS = `
     .footer { padding: 80px 120px; }
   }
   @media (max-width: 768px) {
-    .cursor, .cursor-ring { display: none; }
     .nav { padding: 14px 20px; grid-template-columns: 1fr auto; }
     .nav-left, .nav-right { display: none; }
     .nav-logo { text-align: left; font-size: 18px; }

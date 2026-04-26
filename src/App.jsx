@@ -1,19 +1,28 @@
 import { useState, useEffect, useRef } from "react";
+import { Routes, Route, useLocation, Link } from "react-router-dom";
 import Layout, { goTo } from "./layout";
+import Roadmap from "./Roadmap";
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
 const DATA = {
   cs50cert: "https://certificates.cs50.io/3b57465d-359b-4f43-bd22-1fd0990c31cf.pdf?size=letter",
   projects: [
     {
-      num: "001", title: "Lubmax East Africa", year: "2024",
-      category: "Client Work / CS50 Final",
-      desc: "Professional website for Lubmax East Africa. A real client, a real deadline, shipped from scratch.",
-      tags: ["HTML", "CSS", "JavaScript"],
-      link: "https://lubmax.co.ke",
+      num: "001", title: "Gnoqe", year: "2026",
+      category: "Personal Project / Desktop AI",
+      desc: "Local-first document intelligence desktop app for Windows. Upload PDFs, PPTX, DOCX, TXT, or CSV — ask questions in plain English, get answers with exact page citations and claim-level confidence scoring (Verified / Inferred / Contradicted / Unverified). Multi-model synthesis pipeline under the hood. Invite-only alpha shipped.",
+      tags: ["Electron", "React", "Python", "Flask", "Qdrant", "Groq", "Jina AI", "Ollama", "PyInstaller", "Supabase"],
+      link: "https://gnoqe.chigy.dev",
     },
     {
-      num: "002", title: "devassist", year: "2026",
+      num: "002", title: "Satellite Council", year: "2026",
+      category: "Personal Project / Geospatial AI",
+      desc: "Multi-LLM earth observation tool. Fetches real Sentinel-2 satellite imagery from Microsoft Planetary Computer, computes NDVI vegetation indices, and passes data through a 4-model AI Council — a vision model describes the image, a classifier maps land cover, a synthesizer writes environmental reports, and an evaluator scores confidence. Includes time series change detection across up to 4 dates with pixel-level vegetation gain/loss maps and PDF export with embedded imagery and NDVI charts.",
+      tags: ["React", "Python", "Flask", "Sentinel-2", "NDVI", "Ollama", "Kimi K2", "Llama 4", "PDF Export", "Vercel", "Railway"],
+      link: "https://satellite.chigy.dev/",
+    },
+    {
+      num: "003", title: "devassist", year: "2026",
       category: "Personal Project / AI Tooling",
       desc: "Multi-model AI developer assistant. Two LLMs answer in parallel, a third synthesises a consensus verdict. Built with production-grade auth — argon2id, HIBP breach detection, JWT rotation, account lockout, and full OWASP Top 10 coverage.",
       tags: ["React", "Python", "Flask", "JWT", "Argon2id", "SQLite", "Groq", "Ollama"],
@@ -21,57 +30,32 @@ const DATA = {
       github: true,
     },
     {
-      num: "003", title: "Satellite Council", year: "2026",
-      category: "Personal Project / Geospatial AI",
-      desc: "Multi-LLM earth observation tool. Fetches real Sentinel-2 satellite imagery from Microsoft Planetary Computer, computes NDVI vegetation indices, and passes data through a 4-model AI Council — a vision model describes the image, a classifier maps land cover, a synthesizer writes environmental reports, and an evaluator scores confidence. Includes time series change detection across up to 4 dates with pixel-level vegetation gain/loss maps and PDF export with embedded imagery and NDVI charts.",
-      tags: ["React", "Python", "Flask", "Sentinel-2", "NDVI", "Ollama", "Kimi K2", "Llama 4", "PDF Export", "Vercel", "Railway"],
-      link: "https://satellite.chigy.dev/",
+      num: "004", title: "Lubmax East Africa", year: "2024",
+      category: "Client Work / CS50 Final",
+      desc: "Professional website for Lubmax East Africa. A real client, a real deadline, shipped from scratch.",
+      tags: ["HTML", "CSS", "JavaScript"],
+      link: "https://lubmax.co.ke",
     },
   ],
   skills: [
-    { name: "Python",                      level: 88 },
-    { name: "AI / LLM APIs",              level: 82 },
-    { name: "HTML / CSS",                 level: 85 },
-    { name: "Flask",                      level: 80 },
-    { name: "JavaScript",                 level: 75 },
-    { name: "React",                      level: 75 },
-    { name: "Sentinel-2 / Remote Sensing",level: 70 },
-    { name: "SQL",                        level: 70 },
-    { name: "Git / GitHub",               level: 72 },
-    { name: "C / C++",                    level: 72 },
+    { name: "Python",              level: 88 },
+    { name: "AI / LLM Pipelines", level: 85 },
+    { name: "Flask",               level: 80 },
+    { name: "Electron",            level: 75 },
+    { name: "React",               level: 78 },
+    { name: "Qdrant / Vector DBs", level: 72 },
+    { name: "JavaScript",          level: 75 },
+    { name: "HTML / CSS",          level: 85 },
+    { name: "C / C++",             level: 72 },
+    { name: "Git / GitHub",        level: 72 },
+    { name: "PyInstaller",         level: 68 },
   ],
-  exploring: ["CompTIA Security+", "Remote Sensing & Environmental AI", "LLM Pipeline Architecture", "Game Dev (C++)"],
+  exploring: ["3B1B — Linear Algebra & Calculus", "MIT 6.S191 — Deep Learning", "MIT OCW Math Stack (18.06 → 18.01 → 18.02)", "Computational Neuroscience & ML"],
 };
 
-// ── FONTS & PAGE CSS (sections only — layout CSS lives in Layout.jsx) ─────────
-const FONTS = `
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap');
-`;
-
+// ── PAGE CSS (home-page sections only — base CSS lives in layout.jsx) ─────────
 const CSS = `
-  /* ── BASE ── */
-  :root {
-    --cream: #f2ede4;
-    --ink:   #0d0d0d;
-    --red:   #c8322a;
-    --mid:   #6a6560;
-    --rule:  #c8c2b8;
-    --serif:   'Playfair Display', serif;
-    --display: 'Bebas Neue', sans-serif;
-    --mono:    'DM Mono', monospace;
-  }
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--cream); color: var(--ink); font-family: var(--serif); overflow-x: hidden; }
-  body::before {
-    content: ''; position: fixed; inset: 0; z-index: 1000; pointer-events: none; opacity: .03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 200px;
-  }
-
-
   /* ── DUCK CURSOR ── */
-  .duck-mode * { cursor: none !important; }
   .duck-cursor {
     position: fixed; z-index: 99999; pointer-events: none;
     width: 32px; height: 32px;
@@ -117,10 +101,7 @@ const CSS = `
   .ticker-dot { color: var(--red); }
   @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
-  /* ── SHARED ── */
-  .section-label { font-family: var(--mono); font-size: 10px; color: var(--red); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 32px; display: flex; align-items: center; gap: 12px; }
-  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
-  .red { color: var(--red); }
+  /* ── SHARED (base rules live in layout.jsx) ── */
 
   /* ── ABOUT ── */
   .about { display: grid; grid-template-columns: minmax(0,1fr) 2px minmax(0,1fr); min-height: 80vh; border-bottom: 3px solid var(--ink); }
@@ -163,6 +144,7 @@ const CSS = `
   .proj-visit { font-family: var(--mono); font-size: 10px; color: var(--ink); text-decoration: none; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid var(--ink); padding-bottom: 2px; transition: color .2s, border-color .2s; white-space: nowrap; }
   .proj-visit:hover { color: var(--red); border-color: var(--red); }
   .proj-soon { padding: 48px; font-family: var(--serif); font-size: 24px; font-style: italic; color: var(--rule); }
+  .proj-all-row { padding: 32px 48px 48px; border-top: 1px solid var(--rule); }
 
   /* ── SKILLS ── */
   .skills { border-bottom: 3px solid var(--ink); display: grid; grid-template-columns: 1fr 1fr; }
@@ -182,6 +164,8 @@ const CSS = `
   .exploring-item:first-child { border-top: 1px solid var(--rule); }
   .exploring-dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; flex-shrink: 0; animation: blink 2s ease-in-out infinite; }
   .exploring-badge { font-family: var(--mono); font-size: 8px; letter-spacing: .1em; color: var(--red); border: 1px solid var(--red); padding: 2px 6px; text-transform: uppercase; margin-left: auto; }
+  .exploring-roadmap-link { display: inline-block; margin-top: 24px; font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--mid); text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 2px; transition: color .2s, border-color .2s; }
+  .exploring-roadmap-link:hover { color: var(--red); border-color: var(--red); }
 
   /* ── REVEAL ── */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s ease; }
@@ -236,6 +220,7 @@ const CSS = `
     .proj-action { align-items: flex-start; flex-direction: row; justify-content: space-between; }
     .proj-year { font-size: 28px; }
     .proj-soon { padding: 32px 20px; }
+    .proj-all-row { padding: 24px 20px 32px; }
     .skills { grid-template-columns: 1fr; }
     .skills-left { border-right: none; border-bottom: 1px solid var(--rule); padding: 48px 20px; }
     .skills-right { padding: 48px 20px; }
@@ -429,13 +414,29 @@ function Duck({ onActivate }) {
   );
 }
 
-// ── APP ───────────────────────────────────────────────────────────────────────
+// ── APP ROUTER ────────────────────────────────────────────────────────────────
 export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/roadmap" element={<Roadmap />} />
+    </Routes>
+  );
+}
+
+// ── HOME PAGE ─────────────────────────────────────────────────────────────────
+function HomePage() {
   const [duckMode, setDuckMode] = useState(false);
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    const id = hash.slice(1);
+    if (id) setTimeout(() => goTo(id), 80);
+  }, [hash]);
 
   return (
     <>
-      <style>{FONTS + CSS}</style>
+      <style>{CSS}</style>
       {duckMode && <style>{'* { cursor: none !important; }'}</style>}
       <Layout>
 
@@ -522,16 +523,19 @@ export default function App() {
               <p className="about-pull">"I learned by doing — CS50 gave me the foundations, real projects gave me the rest."</p>
             </Reveal>
             <Reveal delay={0.2}>
-              <p className="about-body-text">My stack is <strong>Python, Flask, and JavaScript</strong>, with a low-level foundation in <strong>C and C++</strong> that makes me think carefully about how things actually work.</p>
+              <p className="about-body-text">I learn by <strong>building, not watching.</strong> CS50 worked because every concept came with something to make — that's been my approach ever since. Every tool I know, I learned by needing it for a real project and going deep until it worked.</p>
             </Reveal>
             <Reveal delay={0.3}>
-              <p className="about-body-text">I built the <strong>Lubmax East Africa</strong> website as a real client project and CS50 final — a real client, a real deadline, shipped from scratch and live at lubmax.co.ke.</p>
+              <p className="about-body-text">My stack is <strong>Python, Flask, and JavaScript</strong>, with a low-level foundation in <strong>C and C++</strong> that makes me think carefully about how things actually work.</p>
             </Reveal>
             <Reveal delay={0.4}>
-              <p className="about-body-text">I've built production AI tools including <strong>devassist</strong> — a multi-model developer assistant with full OWASP-compliant auth — and <strong>Satellite Council</strong>, a geospatial AI system that fetches real Sentinel-2 satellite imagery, computes NDVI vegetation indices, and runs multi-LLM analysis pipelines.</p>
+              <p className="about-body-text">My flagship project is <strong>Gnoqe</strong> — a local-first document intelligence desktop app built with Electron, React, and a PyInstaller-bundled Flask backend. It uses Qdrant for vector search, Jina AI embeddings, and a multi-model Groq pipeline to answer questions about your documents with claim-level confidence scoring.</p>
             </Reveal>
             <Reveal delay={0.5}>
-              <p className="about-body-text">Currently studying for <strong>CompTIA Security+</strong>, deepening my work in <strong>remote sensing and environmental AI</strong>, and exploring <strong>game development</strong> with C++.</p>
+              <p className="about-body-text">I've also built production AI tools including <strong>devassist</strong> — a multi-model developer assistant with full OWASP-compliant auth — and <strong>Satellite Council</strong>, a geospatial AI system that fetches real Sentinel-2 satellite imagery, computes NDVI vegetation indices, and runs multi-LLM analysis pipelines.</p>
+            </Reveal>
+            <Reveal delay={0.6}>
+              <p className="about-body-text">Currently exploring <strong>reinforcement learning and multi-agent systems</strong>, diving into <strong>PyTorch</strong>, and building toward a project where machine learning meets <strong>Unreal 5 game development.</strong></p>
             </Reveal>
           </div>
         </section>
@@ -548,7 +552,7 @@ export default function App() {
             <Reveal key={p.num} delay={i * 0.1}>
               <div className="proj-item">
                 <div className="proj-num">{p.num}</div>
-                <div className="proj-content">
+                <div>
                   <div className="proj-cat">{p.category}</div>
                   <div className="proj-title">{p.title}</div>
                   <p className="proj-desc">{p.desc}</p>
@@ -564,6 +568,17 @@ export default function App() {
             </Reveal>
           ))}
           <div className="proj-soon">More work in progress —</div>
+          <div className="proj-all-row">
+            <a
+              href="https://github.com/ch1gy"
+              target="_blank"
+              rel="noreferrer"
+              className="btn-primary"
+              style={{ display: "inline-block", textDecoration: "none" }}
+            >
+              View All Projects ↗
+            </a>
+          </div>
         </section>
 
         {/* ── SKILLS ── */}
@@ -592,6 +607,9 @@ export default function App() {
                   </div>
                 ))}
               </div>
+              <Link to="/roadmap" className="exploring-roadmap-link">
+                View full roadmap →
+              </Link>
             </div>
           </div>
         </section>

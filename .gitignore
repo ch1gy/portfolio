@@ -25,3 +25,10 @@ dist-ssr
 
 .vercel
 .env*.local
+
+# Claude Code
+.claude/
+
+# Reference / scratch files
+roadmap_v3.html
+split.js
